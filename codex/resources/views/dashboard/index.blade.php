@@ -87,7 +87,17 @@
     <section class="card ld-card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="h5 mb-0">Logs</h2>
+                <div class="d-flex align-items-center gap-2">
+                    <h2 class="h5 mb-0">Logs</h2>
+                    <a
+                        href="{{ request()->fullUrl() }}"
+                        class="text-light text-decoration-none"
+                        aria-label="Refresh logs"
+                        title="Refresh logs"
+                    >
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </a>
+                </div>
                 <span class="text-secondary small">{{ $logs->total() }} entries</span>
             </div>
             <div class="table-responsive ld-log-table-wrap">
