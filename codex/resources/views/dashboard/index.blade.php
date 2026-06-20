@@ -90,8 +90,8 @@
                 <h2 class="h5 mb-0">Logs</h2>
                 <span class="text-secondary small">{{ $logs->total() }} entries</span>
             </div>
-            <div class="table-responsive">
-                <table class="table align-middle table-hover mb-0">
+            <div class="table-responsive ld-log-table-wrap">
+                <table class="table align-middle table-hover mb-0 ld-log-table">
                     <thead>
                         <tr class="text-secondary">
                             <th>日時</th>
@@ -110,7 +110,7 @@
                                         {{ $log->level }}
                                     </span>
                                 </td>
-                                <td>{{ $log->message }}</td>
+                                <td class="ld-log-message">{{ $log->message }}</td>
                             </tr>
                         @empty
                             <tr>

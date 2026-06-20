@@ -41,6 +41,23 @@ body {
     color: var(--ld-text);
 }
 
+.ld-log-table-wrap {
+    overflow-x: auto;
+}
+
+.ld-log-table {
+    min-width: 960px;
+}
+
+.ld-log-table th,
+.ld-log-table td {
+    white-space: nowrap;
+}
+
+.ld-log-message {
+    min-width: 32rem;
+}
+
 .form-control,
 .form-select {
     background: rgba(15, 23, 42, 0.72);
