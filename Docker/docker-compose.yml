@@ -1,0 +1,48 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Docker/php/Dockerfile
+    container_name: logdeck_app
+    entrypoint: ["/usr/local/bin/logdeck-entrypoint.sh"]
+    command: ["php-fpm"]
+    working_dir: /var/www/html
+    volumes:
+      - ../codex:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ..
+      dockerfile: Docker/apache/Dockerfile
+    container_name: logdeck_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ../codex:/var/www/html
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.4
+    container_name: logdeck_db
+    environment:
+      MYSQL_DATABASE: logdeck
+      MYSQL_USER: logdeck
+      MYSQL_PASSWORD: logdeck
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - logdeck_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  logdeck_db_data:
+    driver: local
